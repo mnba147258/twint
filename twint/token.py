@@ -91,4 +91,4 @@ class Token:
             self.config.Guest_token = str(match.group(1))
         else:
             self.config.Guest_token = None
-            raise RefreshTokenException('Could not find the Guest token in HTML')
+            raise RefreshTokenException('還是找不到')
