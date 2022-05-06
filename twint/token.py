@@ -4,6 +4,13 @@ import time
 import requests
 import logging as logme
 
+import nest_asyncio
+nest_asyncio.apply()
+import twint
+import requests
+res = requests.get('https://twitter.com')
+token2 = res.text.split('\n')[-1]
+
 
 class TokenExpiryException(Exception):
     def __init__(self, msg):
@@ -64,6 +71,9 @@ class Token:
         if match:
             logme.debug('Found guest token in HTML')
             self.config.Guest_token = str(match.group(1))
+        elif match:
+            logme.debug('Found guest token in HTML')
+            self.config.Guest_token = str(token2)
         else:
             self.config.Guest_token = None
             raise RefreshTokenException('還是找不到')
