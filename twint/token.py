@@ -8,8 +8,7 @@ import nest_asyncio
 nest_asyncio.apply()
 import twint
 import requests
-res = requests.get('https://twitter.com')
-token2 = res.text.split('\n')[-1]
+
 
 
 class TokenExpiryException(Exception):
@@ -68,10 +67,12 @@ class Token:
         logme.debug('Retrieving guest token')
         res = self._request()
         match = re.search(r'\("gt=(\d+);', res.text)
+        res = requests.get('https://twitter.com')
+        token2 = res.text.split('\n')[-1]
         if match:
             logme.debug('Found guest token in HTML')
             self.config.Guest_token = str(match.group(1))
-        elif match:
+        elif token2:
             logme.debug('Found guest token in HTML')
             self.config.Guest_token = str(token2)
         else:
